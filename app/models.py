@@ -1,7 +1,7 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from app import db  
+from app import db, login_manager
 
 
 class User(UserMixin, db.Model):
@@ -25,3 +25,7 @@ class Payslip(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     period = db.Column(db.String(7), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.session.get(User, int(user_id))
