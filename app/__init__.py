@@ -1,10 +1,22 @@
+import os
+
+from dotenv import load_dotenv
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+
+load_dotenv()
 
 db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
+    
+    secret_key = os.environ.get("SECRET_KEY")
+    if not secret_key:
+        raise RuntimeError(
+            "SECRET_KEY is not set. Copy .env.example to .env and fill it in."
+        )
+    app.config["SECRET_KEY"] = secret_key
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///portal.db"
     
     db.init_app(app)
