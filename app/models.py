@@ -16,3 +16,11 @@ class User(db.Model):
     
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+    
+class Payslip(db.Model):
+    __tablename__ = "payslips"
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    period = db.Column(db.String(7), nullable=False)
+    amount = db.Column(db.Integer, nullable=False)
