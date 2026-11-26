@@ -9,6 +9,11 @@ def create_app():
     
     db.init_app(app)
     
+    from app import models
+    
+    with app.app_context():
+        db.create_all()
+
     @app.route("/")
     def home():
         return "Employee Portal Berjalan!"
