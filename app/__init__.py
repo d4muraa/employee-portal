@@ -2,11 +2,13 @@ import os
 
 from dotenv import load_dotenv
 from flask import Flask
+from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv()
 
 db = SQLAlchemy()
+login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
@@ -20,6 +22,7 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///portal.db"
     
     db.init_app(app)
+    login_manager.init_app(app)
     
     from app import models
     
