@@ -26,6 +26,16 @@ class Payslip(db.Model):
     period = db.Column(db.String(7), nullable=False)
     amount = db.Column(db.Integer, nullable=False)
 
+class LeaveRequest(db.Model):
+    __tablename__ = "leave_request"
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    start_date = db.Column(db.Date, nullable=False)
+    end_date = db.Column(db.Date, nullable=False)
+    reason = db.Column(db.String(255), nullable=False)
+    status = db.Column(db.String(20), nullable=False, default="pending")
+
 @login_manager.user_loader
 def load_user(user_id):
     return db.session.get(User, int(user_id))
