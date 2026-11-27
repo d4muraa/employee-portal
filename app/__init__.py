@@ -1,7 +1,7 @@
 import os
 
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, render_template
 from flask_login import LoginManager
 from flask_sqlalchemy import SQLAlchemy
 
@@ -37,6 +37,6 @@ def create_app():
     
     @app.route("/")
     def home():
-        return "Employee Portal Berjalan!"
+        return render_template("home.html")
     
     return app
