@@ -38,6 +38,9 @@ def create_app():
     from app.routes.admin import admin_bp
     app.register_blueprint(admin_bp)
     
+    from app.routes.employee import employee_bp
+    app.register_blueprint(employee_bp)
+    
     @app.route("/")
     def home():
         return render_template("home.html")
