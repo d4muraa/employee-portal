@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}Beranda - Employee Portal{% endblock %}
+
+{% block content %}
+    <h1>Employee Portal</h1>
+    {% if current_user.is_authenticated %}
+        <p>Selamat datang, {{ current_user.username }}.</p>
+    {% else %}
+        <p>Silakan <a href="{{ url_for('auth.login') }}">login</a> untuk melanjutkan.</p>
+    {% endif %}
+{% endblock %}
