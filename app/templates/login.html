@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Employee Portal</title>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Login - Employee Portal{% endblock %}
+
+{% block content %}
     <h1>Login Employee Portal</h1>
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <p>{{ form.username.label }} {{ form.username() }}</p>
         <p>{{ form.password.label }} {{ form.password() }}</p>
         <p>{{ form.submit() }}</p>
     </form>
-</body>
+{% endblock %}
 </html>
