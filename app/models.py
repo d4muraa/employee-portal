@@ -27,7 +27,7 @@ class Payslip(db.Model):
     amount = db.Column(db.Integer, nullable=False)
 
 class LeaveRequest(db.Model):
-    __tablename__ = "leave_request"
+    __tablename__ = "leave_requests"
     
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
