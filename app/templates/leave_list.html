@@ -12,6 +12,7 @@
             <th>Selesai</th>
             <th>Alasan</th>
             <th>Status</th>
+            <th>Aksi</th>
         </tr>
         {% for leave in leaves %}
         <tr>
@@ -21,10 +22,18 @@
             <td>{{ leave.end_date }}</td>
             <td>{{ leave.reason }}</td>
             <td>{{ leave.status }}</td>
+            <td>
+                {% if leave.status == "pending" %}
+                <form method="POST" action="{{ url_for('admin.approve_leave', leave_id=leave.id) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <button type="submit">Setujui</button>
+                </form>
+                {% endif %}
+            </td>
         </tr>
         {% else %}
         <tr>
-            <td colspan="6">Belum ada pengajuan.</td>
+            <td colspan="7">Belum ada pengajuan.</td>
         </tr>
         {% endfor %}
     </table>
