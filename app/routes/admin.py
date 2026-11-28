@@ -29,6 +29,9 @@ def approve_leave(leave_id):
         abort(404)
     if leave.user_id == current_user.id:
         abort(403)
+    if leave.status != "pending":
+        flash("Pengajuan ini sudah diproses.")
+        return redirect(url_for("admin.list_leaves"))
     leave.status = "approved"
     db.session.commit()
     flash("Pengajuan cuti disetujui.")
