@@ -29,7 +29,7 @@ def approve_leave(leave_id):
         abort(404)
     if leave.user_id == current_user.id:
         abort(403)
-        leave.status = "approved"
-        db.session.commit()
-        flash("Pengajuan cuti disetujui.")
-        return redirect(url_for("admin.list_leaves"))
+    leave.status = "approved"
+    db.session.commit()
+    flash("Pengajuan cuti disetujui.")
+    return redirect(url_for("admin.list_leaves"))
